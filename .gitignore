@@ -1,0 +1,6 @@
+test.py
+**/__pycache__/
+**/data/
+/venv-unix/
+credentials.txt
+/src/telegram_credentials/key.txt
