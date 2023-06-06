@@ -1,13 +1,18 @@
-from src.db.main import addToDB, updateDB, getUserData, getAllUserData
-from src.db.cache import hasUserJoined
+from src.db.main import addToDB, updateDB, getUserData, getAllUserData, userJoin, hasUserJoined
 
 from telegram import User
+
+def userJoinWithoutInvitation(groupId: int, userId: int):
+    if not hasUserJoined(groupId, userId):
+        userJoin(groupId, userId)
 
 def increaseInviteCount(groupId: int, userId: int, username: str, invitedMembers: tuple[User]):
     # Check if any of the newly invited user has ever been in the group
     invite_count = 0
     for member in invitedMembers:
-        if not hasUserJoined(groupId, member.id): invite_count += 1
+        if not hasUserJoined(groupId, member.id): 
+            userJoin(groupId, member.id)
+            invite_count += 1
 
     if invite_count <= 0:
         return

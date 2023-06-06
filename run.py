@@ -23,7 +23,7 @@ def main():
     try:
         app.run(credentialsMap[TELEGRAM_BOT_API_KEY_DICT_KEY], sys.argv[1], sys.argv[2])
     except Exception as e:
-        print(e)
+        print(e.with_traceback())
 
 
 if __name__ == '__main__':
