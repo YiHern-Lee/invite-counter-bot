@@ -40,4 +40,3 @@ def _extractNForLeaderboard(args: list[str]) -> int:
         return n
     except:
         return DEFAULT_NUMBER_OF_INVITERS
-
