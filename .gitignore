@@ -4,3 +4,4 @@ test.py
 /venv-unix/
 credentials.txt
 /src/telegram_credentials/key.txt
+/plan.txt
