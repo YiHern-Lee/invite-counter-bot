@@ -2,14 +2,14 @@ from telegram import Update
 from telegram.ext import ContextTypes
 
 from src.db.query import getTopNInviters
-from src.routes.filters import isGroupChat
+from src.routes.filters import isGroupChat, isGroupBeingMonitored
 
 LEADERBOARD_OPENING_MSG = "🎉🎉 <b>LEADERBOARD</b> 🎉🎉\n<i>Number of Invites</i>\n"
 EMPTY_LEADERBOARD_MSG = "Leaderboard is empty right now!"
 
 DEFAULT_NUMBER_OF_INVITERS = 10
 
-NOT_A_GROUP_CHAT_LINE = "Sorry, this command can only be used in a group chat."
+NOT_A_GROUP_CHAT_LINE = "Sorry, leaderboard is only available for a group chat."
 
 async def leaderboard(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     if not isGroupChat(update):

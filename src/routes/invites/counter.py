@@ -2,8 +2,12 @@ from telegram import Update
 from telegram.ext import ContextTypes
 
 from src.db.query import increaseInviteCount, userJoinWithoutInvitation
+from src.routes.filters import isGroupBeingMonitored
 
 async def newMemberJoin(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    if not isGroupBeingMonitored(update):
+        return 
+    
     from_user = update.message.from_user
     new_chat_members = update.message.new_chat_members
 
@@ -14,4 +18,5 @@ async def newMemberJoin(update: Update, context: ContextTypes.DEFAULT_TYPE) -> N
     if from_user in new_chat_members:
         userJoinWithoutInvitation(groupId=group_id, userId=user_id)
     else:
-        increaseInviteCount(groupId=group_id, userId=user_id, username=username, invitedMembers=new_chat_members)
+        increaseInviteCount(groupId=group_id, userId=user_id, 
+                            username=username, invitedMembers=new_chat_members)
