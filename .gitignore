@@ -5,3 +5,4 @@ test.py
 credentials.txt
 /src/telegram_credentials/key.txt
 /plan.txt
+/src/group_monitor/group_list.txt
