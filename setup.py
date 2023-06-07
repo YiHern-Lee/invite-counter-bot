@@ -1,4 +1,4 @@
-from asyncio import ensure_future, TimeoutError
+import asyncio
 import os
 
 from telegram.ext import Application
@@ -20,8 +20,8 @@ def main():
         return
     app = Application.builder().token(token).build()
     try:
-        ensure_future(app.bot.set_my_commands(getCommandInstructions()))
-    except TimeoutError:
+        asyncio.run(app.bot.set_my_commands(getCommandInstructions()))
+    except asyncio.TimeoutError:
         print("Failed to set Commands")
 
 if __name__ == '__main__':
