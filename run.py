@@ -1,4 +1,6 @@
 import os
+import traceback
+
 from src import app
 from src.telegram_credentials import credentials_loader
 import sys
@@ -22,8 +24,8 @@ def main():
     credentialsMap = credentials_loader.getCredentialsMap(PATH_TO_KEY, PATH_TO_CRED)
     try:
         app.run(credentialsMap[TELEGRAM_BOT_API_KEY_DICT_KEY], sys.argv[1], sys.argv[2])
-    except Exception as e:
-        print(e.with_traceback())
+    except:
+        traceback.print_exc()
 
 
 if __name__ == '__main__':

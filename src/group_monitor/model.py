@@ -6,7 +6,6 @@ PATH_TO_GROUP_LIST = os.path.dirname(os.path.abspath(__file__)) + '/group_list.t
 class GroupListHandler:
     def __init__(self):
         self._group_list = self._loadGroupList()
-        atexit.register(self._saveGroupList)
 
     def isGroupInList(self, groupId: int) -> bool:
         return groupId in self._group_list
@@ -17,6 +16,11 @@ class GroupListHandler:
     def removeGroupFromList(self, groupId: int):
         if groupId in self._group_list:
             self._group_list.remove(groupId)
+
+    def updateGroupId(self, oldGroupId: int, newGroupId: int):
+        if oldGroupId in self._group_list:
+            self._group_list.remove(oldGroupId)
+        self._group_list.add(newGroupId)
 
     def _loadGroupList(self) -> set[int]:
         group_list = set()
@@ -32,7 +36,7 @@ class GroupListHandler:
             pass
         return group_list
     
-    def _saveGroupList(self):
+    def saveGroupList(self):
         with open(PATH_TO_GROUP_LIST, 'wt') as f:
             for group_id in self._group_list:
                 f.write(str(group_id) + '\n')
