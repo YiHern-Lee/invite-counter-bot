@@ -1,6 +1,7 @@
 from telegram import BotCommand
 from telegram.ext import filters, BaseHandler, CommandHandler, MessageHandler
 
+from src.routes.basics.actions import migrateGroupChat
 from src.routes.basics.commands import start
 from src.routes.invites.counter import newMemberJoin
 from src.routes.invites.get import leaderboard
@@ -14,7 +15,8 @@ def getHandlers() -> list[BaseHandler]:
         CommandHandler('startrec', startRecord),
         CommandHandler('stoprec', stopRecord),
         
-        MessageHandler(filters.StatusUpdate.NEW_CHAT_MEMBERS, newMemberJoin)
+        MessageHandler(filters.StatusUpdate.NEW_CHAT_MEMBERS, newMemberJoin),
+        MessageHandler(filters.StatusUpdate.MIGRATE, migrateGroupChat)
     ]
 
 def getCommandInstructions() -> list[tuple[str, str]]:

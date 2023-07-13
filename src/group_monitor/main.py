@@ -1,3 +1,5 @@
+import atexit
+
 from src.group_monitor.model import GroupListHandler
 
 GROUP_LIST_HANDLER = GroupListHandler()
@@ -10,3 +12,11 @@ def addGroupToList(groupId: int):
 
 def removeGroupFromList(groupId: int):
     GROUP_LIST_HANDLER.removeGroupFromList(groupId)
+
+def updateGroupId(oldGroupId: int, newGroupId: int):
+    GROUP_LIST_HANDLER.updateGroupId(oldGroupId, newGroupId)
+
+def saveGroupMonitoringList():
+    GROUP_LIST_HANDLER.saveGroupList()
+
+atexit.register(saveGroupMonitoringList)
