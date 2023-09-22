@@ -23,7 +23,7 @@ def updateDB(groupId: int, dataId: int, data: dict):
     data_handler = _getDataHandler(groupId)
     data_handler.updateDb(dataId, data)
 
-def getUserData(groupId: int, userId: int) -> dict:
+def getUserInviteData(groupId: int, userId: int) -> dict:
     data_handler = _getDataHandler(groupId)
     return data_handler.getUserData(userId)
 

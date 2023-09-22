@@ -4,7 +4,7 @@ from telegram.ext import ContextTypes
 START_LINE = """
 Hi! I am <b>Invite Counter Bot</b>!
 
-To use me, simple add me into a group chat. 
+To use me, simply add me into a group chat. 
 I will keep track of the number of users invited by each group member! 
 Only invites of new users who have <b>never been in the group</b> will be counted.
 """

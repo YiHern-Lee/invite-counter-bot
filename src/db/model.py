@@ -9,20 +9,20 @@ PATH_TO_DATA = os.path.dirname(os.path.abspath(__file__)) + '/data/'
 class DataHandler:
     def __init__(self, groupId: int):
         self._group_id = groupId
-        self._like_count_handler = LikeCountHandler(groupId)
+        self._invite_count_handler = InviteCountHandler(groupId)
         self._group_user_handler = GroupUserHandler(groupId)
 
     def addToDb(self, data: dict):
-        self._like_count_handler.addToDb(data)
+        self._invite_count_handler.addToDb(data)
 
     def updateDb(self, dataId: int, data: dict):
-        self._like_count_handler.updateDb(dataId, data)
+        self._invite_count_handler.updateDb(dataId, data)
 
     def getUserData(self, userId: int) -> dict:
-        return self._like_count_handler.getUserData(userId)
+        return self._invite_count_handler.getUserData(userId)
     
     def getAllUserData(self) -> list[dict[str, any]]:
-        return self._like_count_handler.getAllUserData()
+        return self._invite_count_handler.getAllUserData()
     
     def userJoin(self, userId: int):
         self._group_user_handler.userJoin(userId)
@@ -31,7 +31,7 @@ class DataHandler:
         return self._group_user_handler.hasUserJoined(userId) 
     
     def migrateDataHandler(self, oldDataHandler: 'DataHandler'):
-        self._like_count_handler.migrateFromOldDataFile(oldDataHandler._like_count_handler)
+        self._invite_count_handler.migrateFromOldDataFile(oldDataHandler._invite_count_handler)
         self._group_user_handler.migrateFromOldDataFile(oldDataHandler._group_user_handler)
         oldDataHandler._removeDataFolder()
 
@@ -43,7 +43,7 @@ class DataHandler:
         path_to_data_folder = _findPathToData(self._group_id)
         rmtree(path_to_data_folder, ignore_errors=True)
 
-class LikeCountHandler:
+class InviteCountHandler:
     def __init__(self, groupId: int):
         self._mutex = Lock()
         self._group_id = groupId
@@ -58,7 +58,7 @@ class LikeCountHandler:
     def _createDb(self) -> db.JsonDatabase:
         return db.getDb(self._formatPathToData())
     
-    def migrateFromOldDataFile(self, oldHandler: 'LikeCountHandler'):
+    def migrateFromOldDataFile(self, oldHandler: 'InviteCountHandler'):
         self._mutex.acquire()
 
         path_to_old_data = oldHandler._formatPathToData()
