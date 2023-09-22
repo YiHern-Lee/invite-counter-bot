@@ -1,5 +1,3 @@
-import asyncio
-
 from telegram import Update, Bot
 
 from src.group_monitor.main import isGroupInList
