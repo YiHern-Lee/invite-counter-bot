@@ -27,7 +27,12 @@ async def leaderboard(update: Update, context: ContextTypes.DEFAULT_TYPE) -> Non
         line = LEADERBOARD_OPENING_MSG
 
     for i in range(len(top_n_users)):
-        line += str(i + 1) + ". " + top_n_users[i].get("username") + ": " + str(top_n_users[i].get("inviteCount")) + "\n"
+        username = top_n_users[i].get("username")
+        if not username:
+            username = top_n_users[i].get("name")
+        if not username:
+            username = ""
+        line += str(i + 1) + ". " + username + ": " + str(top_n_users[i].get("inviteCount")) + "\n"
     return await update.message.reply_text(line, quote=False, parse_mode='html')
 
 def _extractNForLeaderboard(args: list[str]) -> int:

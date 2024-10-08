@@ -6,7 +6,7 @@ import os
 # Stores the message to be encrypted
 # Message should be in format "<key>: <value>" and each key-value pair should be in a new line
 message = """
-telegram-bot-api-key: <insert telegram-bot-api-key>
+telegram-bot-api-key: <telegram-bot-api-key>
 
 """
 
