@@ -4,7 +4,7 @@ import os
 from telegram.ext import Application
 
 from src.telegram_credentials.credentials_loader import getCredentialsMap
-from src.routes.getActions import getCommandInstructions
+from routes.actions import getCommandInstructions
 
 CURRENT_PATH = os.path.dirname(os.path.abspath(__file__))
 PATH_TO_KEY = CURRENT_PATH + "/src/telegram_credentials/key.txt"

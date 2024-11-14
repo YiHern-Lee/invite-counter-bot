@@ -19,11 +19,11 @@ TELEGRAM_BOT_API_KEY_DICT_KEY = 'telegram-bot-api-key'
 def main():
     if len(sys.argv) < 3:
         print("Number of arguments is insufficient.")
-        print("Run the program with command line arguments: <port_number> <webhook_url>")
+        print("Run the program with command line arguments: <port_number> <webhook_url> <optional: mongo>")
         return
     credentialsMap = credentials_loader.getCredentialsMap(PATH_TO_KEY, PATH_TO_CRED)
     try:
-        app.run(credentialsMap[TELEGRAM_BOT_API_KEY_DICT_KEY], sys.argv[1], sys.argv[2])
+        app.run(credentialsMap[TELEGRAM_BOT_API_KEY_DICT_KEY], sys.argv[1], sys.argv[2], sys.argv[3:])
     except:
         traceback.print_exc()
 

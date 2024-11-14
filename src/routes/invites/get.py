@@ -1,8 +1,8 @@
 from telegram import Update
 from telegram.ext import ContextTypes
 
-from src.db.query import getTopNInviters
-from src.routes.filters import isGroupChat, isGroupBeingMonitored
+from src.service.query import getTopNInviters
+from src.service.filters import isGroupChat
 
 LEADERBOARD_OPENING_MSG = "🎉🎉 <b>LEADERBOARD</b> 🎉🎉\n<i>Number of Invites</i>\n"
 EMPTY_LEADERBOARD_MSG = "Leaderboard is empty right now!"

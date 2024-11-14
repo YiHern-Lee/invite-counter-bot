@@ -1,8 +1,8 @@
 from telegram import Update
 from telegram.ext import ContextTypes
 
-from src.group_monitor.main import addGroupToList, isGroupInList, removeGroupFromList
-from src.routes.filters import isGroupChat, isUserAnAdmin
+from src.service.query import isGroupBeingMonitored, addGroupToList, removeGroupFromList
+from src.service.filters import isGroupChat, isUserAnAdmin
 
 NOT_A_GROUP_CHAT_LINE = "Sorry, invites recording is only for group chats!"
 GROUP_NOT_UNDER_MONITORING_LINE = "I am not 🙅‍♂️ monitoring this group!"
@@ -20,7 +20,7 @@ async def startRecord(update: Update, context: ContextTypes.DEFAULT_TYPE) -> Non
     
     group_id = update.message.chat.id
     
-    if isGroupInList(group_id):
+    if isGroupBeingMonitored(group_id):
         return await update.message.reply_text(GROUP_UNDER_MONITORING_LINE, quote=False)
     
     addGroupToList(group_id)
@@ -36,7 +36,7 @@ async def stopRecord(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None
 
     group_id = update.message.chat.id
         
-    if not isGroupInList(group_id):
+    if not isGroupBeingMonitored(group_id):
         return await update.message.reply_text(GROUP_NOT_UNDER_MONITORING_LINE, quote=False)
     
     removeGroupFromList(group_id)
