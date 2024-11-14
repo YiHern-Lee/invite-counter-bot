@@ -13,7 +13,6 @@ async def newMemberJoin(update: Update, context: ContextTypes.DEFAULT_TYPE) -> N
     if not isGroupBeingMonitored(group_id):
         return 
 
-    print(str(user_id), str(group_id))
     if from_user in new_chat_members:
         userJoinWithoutInvitation(groupId=group_id, userId=user_id)
     else:

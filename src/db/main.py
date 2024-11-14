@@ -98,6 +98,6 @@ def migrateDataHandler(oldGroupId: int, newGroupId: int):
 
 def _saveData():
     for _, data_handler in DATA_HANDLER_MAP.items():
-        data_handler._group_user_handler._saveUserSet()
+        data_handler.saveUserDataSet()
 
 atexit.register(_saveData)
